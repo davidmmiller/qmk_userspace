@@ -16,8 +16,9 @@
 
 #include QMK_KEYBOARD_H
 
-#ifdef AUDIO_ENABLE
-#    include "muse.h"
+// Tap Dance support
+#ifdef TAP_DANCE_ENABLE
+#include "process_tap_dance.h"
 #endif
 
 enum planck_layers {
@@ -29,25 +30,50 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-  QWERTY = SAFE_RANGE,
   BACKLIT = SAFE_RANGE
 };
 
+#ifdef TAP_DANCE_ENABLE
+// Tap Dance declarations
+enum {
+    TD_A_ALT,
+    TD_S_CTL,
+    TD_D_GUI,
+    TD_F_SFT,
+    TD_J_SFT,
+    TD_K_GUI,
+    TD_L_CTL,
+    TD_SCLN_ALT
+};
+
+// Tap Dance definitions - simple double tap to repeat
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_A_ALT]    = ACTION_TAP_DANCE_DOUBLE(KC_A, KC_A),
+    [TD_S_CTL]    = ACTION_TAP_DANCE_DOUBLE(KC_S, KC_S),
+    [TD_D_GUI]    = ACTION_TAP_DANCE_DOUBLE(KC_D, KC_D),
+    [TD_F_SFT]    = ACTION_TAP_DANCE_DOUBLE(KC_F, KC_F),
+    [TD_J_SFT]    = ACTION_TAP_DANCE_DOUBLE(KC_J, KC_J),
+    [TD_K_GUI]    = ACTION_TAP_DANCE_DOUBLE(KC_K, KC_K),
+    [TD_L_CTL]    = ACTION_TAP_DANCE_DOUBLE(KC_L, KC_L),
+    [TD_SCLN_ALT] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_SCLN)
+};
+#endif
+
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
-#define MOVEMENT MO(_MOVEMENT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* Qwerty with Home Row Mods (ACGS)
+/* Qwerty with Home Row Mods (ACGS) + Tap Dance
  * Left:  A=Alt, S=Ctrl, D=GUI, F=Shift
  * Right: J=Shift, K=GUI, L=Ctrl, ;=Alt
- * G-hold activates arrow/navigation layer
+ * G-hold activates movement/navigation layer
+ * Double-tap any home row mod key to repeat the letter
  * 
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  | A/Alt| S/Ctl| D/GUI| F/Sft| G/Arr|   H  | J/Sft| K/GUI| L/Ctl| ;/Alt|  '   |
+ * | Esc  | A/Alt| S/Ctl| D/GUI| F/Sft| G/Mov|   H  | J/Sft| K/GUI| L/Ctl| ;/Alt|  '   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Sft/En|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -55,10 +81,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,              KC_W,              KC_E,              KC_R,              KC_T,               KC_Y,    KC_U,              KC_I,              KC_O,              KC_P,                 KC_BSPC,
-    KC_ESC,  MT(MOD_LALT,KC_A), MT(MOD_LCTL,KC_S), MT(MOD_LGUI,KC_D), MT(MOD_LSFT,KC_F), LT(_MOVEMENT,KC_G), KC_H,    MT(MOD_RSFT,KC_J), MT(MOD_RGUI,KC_K), MT(MOD_RCTL,KC_L), MT(MOD_LALT,KC_SCLN), KC_QUOT,
-    KC_LSFT, KC_Z,              KC_X,              KC_C,              KC_V,              KC_B,               KC_N,    KC_M,              KC_COMM,           KC_DOT,            KC_SLSH,              LSFT_T(KC_ENTER),
-    BACKLIT, KC_LCTL,           KC_LALT,           KC_LGUI,           LOWER,             KC_SPC,             KC_SPC,  RAISE,             KC_LEFT,           KC_DOWN,           KC_UP,                KC_RGHT
+    KC_TAB,  KC_Q,                      KC_W,                      KC_E,                      KC_R,                      KC_T,              KC_Y,    KC_U,                      KC_I,                      KC_O,                      KC_P,                        KC_BSPC,
+    KC_ESC,  MT(MOD_LALT,TD(TD_A_ALT)), MT(MOD_LCTL,TD(TD_S_CTL)), MT(MOD_LGUI,TD(TD_D_GUI)), MT(MOD_LSFT,TD(TD_F_SFT)), LT(_MOVEMENT,KC_G), KC_H,    MT(MOD_RSFT,TD(TD_J_SFT)), MT(MOD_RGUI,TD(TD_K_GUI)), MT(MOD_RCTL,TD(TD_L_CTL)), MT(MOD_LALT,TD(TD_SCLN_ALT)), KC_QUOT,
+    KC_LSFT, KC_Z,                      KC_X,                      KC_C,                      KC_V,                      KC_B,              KC_N,    KC_M,                      KC_COMM,                   KC_DOT,                    KC_SLSH,                     LSFT_T(KC_ENTER),
+    BACKLIT, KC_LCTL,                   KC_LALT,                   KC_LGUI,                   LOWER,                     KC_SPC,            KC_SPC,  RAISE,                     KC_LEFT,                   KC_DOWN,                   KC_UP,                       KC_RGHT
 ),
 
 /* Lower
