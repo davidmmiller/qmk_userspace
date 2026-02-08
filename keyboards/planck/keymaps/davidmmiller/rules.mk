@@ -1,3 +1,1 @@
-ifeq ($(strip $(AUDIO_ENABLE)), yes)
-    SRC += muse.c
-endif
+# Empty rules.mk - all features disabled by default
