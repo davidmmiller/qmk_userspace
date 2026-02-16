@@ -78,14 +78,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Sft/En|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | F/LED| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Bksp |  Alt | Ctrl |      |
+ * | F/LED| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Bksp |  Alt | Ctrl | GUI  |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,                 KC_Q,                      KC_W,                      KC_E,                      KC_R,                      KC_T,              KC_Y,    KC_U,                      KC_I,                      KC_O,                      KC_P,                          KC_BSPC,
     KC_ESC,                 MT(MOD_LALT,TD(TD_A_ALT)), MT(MOD_LCTL,TD(TD_S_CTL)), MT(MOD_LGUI,TD(TD_D_GUI)), MT(MOD_LSFT,TD(TD_F_SFT)), LT(_MOVEMENT,KC_G), KC_H,    MT(MOD_RSFT,TD(TD_J_SFT)), MT(MOD_RGUI,TD(TD_K_GUI)), MT(MOD_RCTL,TD(TD_L_CTL)), MT(MOD_LALT,TD(TD_SCLN_ALT)), KC_QUOT,
     KC_LSFT,                KC_Z,                      KC_X,                      KC_C,                      KC_V,                      KC_B,              KC_N,    KC_M,                      KC_COMM,                   KC_DOT,                    KC_SLSH,                       LSFT_T(KC_ENTER),
-    LT(_FUNCTION, BACKLIT), KC_LCTL,                   KC_LALT,                   KC_LGUI,                   LOWER,                     KC_SPC,            KC_SPC,  RAISE,                     KC_BSPC,                   KC_RALT,                   KC_UP,                         KC_RGHT
+    LT(_FUNCTION, BACKLIT), KC_LCTL,                   KC_LALT,                   KC_LGUI,                   LOWER,                     KC_SPC,            KC_SPC,  RAISE,                     KC_BSPC,                   KC_RALT,                   KC_CTRL,                       KC_RGUI
 ),
 
 /* Lower
