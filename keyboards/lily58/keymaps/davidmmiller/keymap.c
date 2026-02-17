@@ -78,8 +78,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |Sft/En|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Bksp | RGUI | RAlt |
- *                   |      |      |      |/       /         \      \ |      |      |      |      |
+ *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Bksp | RAlt |
+ *                   |      |      |      |/       /         \      \ |      |      |      |      
  *                   `----------------------------'           '------''--------------------'
  */
 [_QWERTY] = LAYOUT(
@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,                      KC_W,                      KC_E,                      KC_R,                      KC_T,              KC_Y,    KC_U,                      KC_I,                      KC_O,                      KC_P,                        KC_BSPC,
     KC_ESC,  MT(MOD_LALT,TD(TD_A_ALT)), MT(MOD_LCTL,TD(TD_S_CTL)), MT(MOD_LGUI,TD(TD_D_GUI)), MT(MOD_LSFT,TD(TD_F_SFT)), LT(_MOVEMENT,KC_G),                                  KC_H,    MT(MOD_RSFT,TD(TD_J_SFT)), MT(MOD_RGUI,TD(TD_K_GUI)), MT(MOD_RCTL,TD(TD_L_CTL)), MT(MOD_LALT,TD(TD_SCLN_ALT)), KC_QUOT,
     KC_LSFT, KC_Z,                      KC_X,                      KC_C,                      KC_V,                      KC_B,              KC_LBRC, KC_RBRC, KC_N,    KC_M,                      KC_COMM,                   KC_DOT,                    KC_SLSH,                     LSFT_T(KC_ENTER),
-                                                                   MO(_FUNCTION),             KC_LGUI,                   MO(_LOWER),        KC_SPC,  KC_ENT,  MO(_RAISE), KC_BSPC, KC_RGUI, KC_RALT
+                                                                   MO(_FUNCTION),             KC_LGUI,                   MO(_LOWER),        KC_SPC,  KC_ENT,  MO(_RAISE), KC_BSPC, KC_RALT
 ),
 
 /* LOWER
@@ -100,8 +100,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Del  | RGUI | RAlt |
- *                   |      |      |      |/       /         \      \ |      |      |      |      |
+ *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Del  | RAlt |
+ *                   |      |      |      |/       /         \      \ |      |      |      |      
  *                   `----------------------------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT(
@@ -109,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL,
     _______, _______, _______, _______, _______, _______,                   KC_PIPE, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                               _______, _______, _______, _______, _______, _______, KC_DEL,  _______, _______
+                               _______, _______, _______, _______, _______, _______, KC_DEL, _______
 ),
 
 /* RAISE
@@ -122,8 +122,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Bksp | RGUI | RAlt |
- *                   |      |      |      |/       /         \      \ |      |      |      |      |
+ *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Bksp | RAlt |
+ *                   |      |      |      |/       /         \      \ |      |      |      |      
  *                   `----------------------------'           '------''--------------------'
  */
 [_RAISE] = LAYOUT(
@@ -131,29 +131,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
     _______, _______, _______, _______, _______, _______,                   _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                               _______, _______, _______, _______, _______, _______, _______, _______, _______
+                               _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
 /* ADJUST (Lower + Raise)
+ *                      v------------------------RGB CONTROL--------------------v
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |      | Reset|Debug | RGB  |RGBMOD| HUE+ |                    | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|  Del |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * | RGB  |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      |      |RGB ON| HUE+ | SAT+ | VAL+ |
+ * |      |      |      |      |      |      |-------.    ,-------|      |      |      |      |      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |      | MODE | HUE- | SAT- | VAL- |
+ * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Bksp | RGUI | RAlt |
- *                   |      |      |      |/       /         \      \ |      |      |      |      |
+ *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Bksp | RAlt |
+ *                   |      |      |      |/       /         \      \ |      |      |      |      
  *                   `----------------------------'           '------''--------------------'
  */
 [_ADJUST] = LAYOUT(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, UG_TOGG, UG_HUEU, UG_SATU, UG_VALU,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, UG_NEXT, UG_HUED, UG_SATD, UG_VALD,
-                               _______, _______, _______, _______, _______, _______, _______, _______, _______
+    _______, QK_BOOT, DB_TOGG, UG_TOGG, UG_NEXT, UG_HUEU,                   UG_HUED, UG_SATU, UG_SATD, UG_VALU, UG_VALD, KC_DEL,
+    UG_TOGG, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                               _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
 /* MOVEMENT (G-hold Navigation Layer)
@@ -175,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______,        _______,                   KC_ESC,  KC_PGUP,        KC_PGDN, _______, _______, _______,
     _______, _______, _______, _______, _______,        _______,                   KC_LEFT, KC_DOWN,        KC_UP,   KC_RGHT, _______, _______,
     _______, _______, _______, _______, _______,        _______, _______, _______, _______, KC_HOME,        KC_END,  _______, _______, _______,
-                               _______, _______, LALT(KC_LEFT), _______, _______, LALT(KC_RIGHT), _______, _______
+                               _______, _______, LALT(KC_LEFT), _______, _______, LALT(KC_RIGHT), _______
 ),
 
 /* FUNCTION (Bottom-left hold)
@@ -197,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, KC_F12,
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                               _______, _______, _______, _______, _______, _______, _______, _______
+                               _______, _______, _______, _______, _______, _______, _______
 )
 
 };
