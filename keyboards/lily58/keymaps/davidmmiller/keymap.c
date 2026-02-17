@@ -35,8 +35,7 @@ enum layer_number {
     _FUNCTION
 };
 
-#ifdef TAP_DANCE_ENABLE
-// Tap Dance declarations
+// Tap Dance declarations - must be outside ifdef so TD() macro works
 enum {
     TD_A_ALT,
     TD_S_CTL,
@@ -48,6 +47,7 @@ enum {
     TD_SCLN_ALT
 };
 
+#ifdef TAP_DANCE_ENABLE
 // Tap Dance definitions - simple double tap to repeat
 tap_dance_action_t tap_dance_actions[] = {
     [TD_A_ALT]    = ACTION_TAP_DANCE_DOUBLE(KC_A, KC_A),
@@ -122,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Bksp | RAlt |
+ *                   | FUNC | LGUI |LOWER | /Space  /       \Enter \  |RAISE | Bksp | RAlt
  *                   |      |      |      |/       /         \      \ |      |      |      |      
  *                   `----------------------------'           '------''--------------------'
  */
@@ -176,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______,        _______,                   KC_ESC,  KC_PGUP,        KC_PGDN, _______, _______, _______,
     _______, _______, _______, _______, _______,        _______,                   KC_LEFT, KC_DOWN,        KC_UP,   KC_RGHT, _______, _______,
     _______, _______, _______, _______, _______,        _______, _______, _______, _______, KC_HOME,        KC_END,  _______, _______, _______,
-                               _______, _______, LALT(KC_LEFT), _______, _______, LALT(KC_RIGHT), _______
+                               _______, _______, LALT(KC_LEFT), _______, _______, LALT(KC_RIGHT), _______, _______
 ),
 
 /* FUNCTION (Bottom-left hold)
@@ -198,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, KC_F12,
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                               _______, _______, _______, _______, _______, _______, _______
+                               _______, _______, _______, _______, _______, _______, _______, _______
 )
 
 };
