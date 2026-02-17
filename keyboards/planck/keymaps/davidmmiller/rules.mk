@@ -1,3 +1,4 @@
 # rules.mk - features enable/disable goes here
 
-TAP_DANCE_ENABLE = yes
+# Tap Dance removed - using plain MT() mod-tap
+TAP_DANCE_ENABLE = no
